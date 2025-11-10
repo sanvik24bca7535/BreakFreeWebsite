@@ -1,0 +1,1075 @@
+*<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Break Free - Addiction Awareness & Recovery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --accent-color: #10b981;
+            --danger-color: #ef4444;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --text-dark: #374151;
+            --text-light: #6b7280;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(124, 58, 237, 0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f0f0f0" width="1200" height="800"/><path fill="%23e0e0e0" d="M0 400L50 420L100 380L150 440L200 400L250 460L300 420L350 400L400 440L450 380L500 420L550 400L600 440L650 380L700 420L750 400L800 440L850 380L900 420L950 400L1000 440L1050 380L1100 420L1150 400L1200 440V800H0V400Z"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 40px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 22px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: white;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 18px;
+            margin-bottom: 60px;
+        }
+
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Statistics */
+        .stats {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin: 60px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* Hazards Page */
+        .hazard-section {
+            margin-bottom: 60px;
+        }
+
+        .hazard-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hazard-image {
+            width: 100;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        .hazard-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .hazard-text ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .hazard-text li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .hazard-text li::before {
+            content: '⚠️';
+            position: absolute;
+            left: 0;
+        }
+
+        /* Prevention Tips */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, var(--accent-color), #059669);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.3);
+        }
+
+        .tip-card h4 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Resources */
+        .resource-card {
+            background: white;
+            border-left: 5px solid var(--primary-color);
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .resource-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 10px 0;
+            font-size: 18px;
+            color: var(--text-dark);
+        }
+
+        .emergency {
+            background: linear-gradient(135deg, var(--danger-color), #dc2626);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .emergency h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .emergency .btn {
+            background: white;
+            color: var(--danger-color);
+            font-size: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 40px 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 80px;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                padding: 40px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .hazard-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Page Specific Styles */
+        .page-header {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .content-section {
+            background: white;
+        }
+
+        /* Hidden by default - shown via JS */
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">🆓 Break Free</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#hazards" class="nav-link">Hazards</a></li>
+                <li><a href="#prevention" class="nav-link">Prevention</a></li>
+                <li><a href="#resources" class="nav-link">Resources</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page-content active">
+        <section class="hero">
+            <div class="hero-content fade-in">
+                <h1>Break Free from Addiction</h1>
+                <p>Your journey to recovery starts here. Get the support, information, and resources you need to overcome addiction and reclaim your life.</p>
+                <a href="#hazards" class="btn">Learn More</a>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Understanding Addiction</h2>
+            <p class="section-subtitle">Addiction is a complex condition that affects millions worldwide. Knowledge is the first step toward recovery.</p>
+            
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">🧠</div>
+                    <h3>What is Addiction?</h3>
+                    <p>Addiction is a chronic disease characterized by compulsive substance use despite harmful consequences. It affects brain chemistry and behavior patterns.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚠️</div>
+                    <h3>Common Substances</h3>
+                    <p>Alcohol, tobacco, prescription medications, illegal drugs, and even behavioral addictions can severely impact your health and wellbeing.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💪</div>
+                    <h3>Recovery is Possible</h3>
+                    <p>With proper support, treatment, and determination, millions of people successfully overcome addiction every year. You can too.</p>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>280M+</h3>
+                        <p>People affected by substance use disorders worldwide</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>75%</h3>
+                        <p>Can achieve long-term recovery with treatment</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>24/7</h3>
+                        <p>Help available anytime you need it</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Hazards Page -->
+    <div id="hazards" class="page-content">
+        <div class="page-header">
+            <h1>Hazards of Addiction</h1>
+            <p>Understanding the serious consequences of substance abuse</p>
+        </div>
+
+        <section class="content-section">
+            <div class="hazard-section">
+                <h2 class="section-title">Physical Health Effects</h2>
+                <div class="hazard-content">
+                    <div class="hazard-image">🫀</div>
+                    <div class="hazard-text">
+                        <h3>How Addiction Damages Your Body</h3>
+                        <ul style="font-size: 20px;">
+                            <li>Cardiovascular disease and heart attacks</li>
+                            <li>Liver damage and cirrhosis</li>
+                            <li>Respiratory problems and lung disease</li>
+                            <li>Weakened immune system</li>
+                            <li>Increased risk of cancer</li>
+                            <!-- <li>Neurological damage and brain deterioration</li> -->
+                            <li>Kidney failure and organ damage</li>
+                            <li>Malnutrition and vitamin deficiencies</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hazard-section">
+                <h2 class="section-title">Mental Health Impact</h2>
+                <div class="hazard-content">
+                    <div class="hazard-text">
+                        <h3>Psychological Consequences</h3>
+                        <ul style="font-size: 20px;">
+                            <li>Depression and anxiety disorders</li>
+                            <li>Memory loss and cognitive decline</li>
+                            <li>Paranoia and psychosis</li>
+                            <li>Mood swings and emotional instability</li>
+                            <li>Increased suicide risk</li>
+                            <li>Sleep disorders and insomnia</li>
+                            <li>Loss of motivation and pleasure</li>
+                            <li>Personality changes</li>
+                        </ul>
+                    </div>
+                    <div class="hazard-image">🧠</div>
+                </div>
+            </div>
+
+            <div class="hazard-section">
+                <h2 class="section-title">Social Consequences</h2>
+                <div class="hazard-content">
+                    <div class="hazard-image">👥</div>
+                    <div class="hazard-text">
+                        <h3>Impact on Relationships and Society</h3>
+                        <ul style="font-size: 20px;">
+                            <li>Family breakdown and divorce</li>
+                            <li>Loss of friendships and social isolation</li>
+                            <li>Child neglect and domestic violence</li>
+                            <li>Job loss and career destruction</li>
+                            <li>Legal problems and incarceration</li>
+                            <li>Homelessness and poverty</li>
+                            <li>Loss of trust and reputation</li>
+                            <li>Social stigma and discrimination</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hazard-section">
+                <h2 class="section-title">Economic Impact</h2>
+                <div class="hazard-content">
+                    <div class="hazard-text">
+                        <h3>Financial Destruction</h3>
+                        <ul style="font-size: 20px;">
+                            <li>Cost of substances draining savings</li>
+                            <li>Medical bills from health complications</li>
+                            <li>Lost income from unemployment</li>
+                            <li>Legal fees and fines</li>
+                            <li>Bankruptcy and debt accumulation</li>
+                            <li>Loss of property and assets</li>
+                            <li>Reduced earning potential</li>
+                            <li>Burden on family finances</li>
+                        </ul>
+                    </div>
+                    <div class="hazard-image">💸</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Prevention Page -->
+    <div id="prevention" class="page-content">
+        <div class="page-header">
+            <h1>Prevention & Recovery</h1>
+            <p>Strategies to avoid addiction and maintain a healthy lifestyle</p>
+        </div>
+
+        <section class="content-section">
+            <h2 class="section-title">Prevention Strategies</h2>
+            <p class="section-subtitle">Take control of your life with these evidence-based approaches</p>
+
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>🎓 Education</h4>
+                    <p>Learn about the risks and effects of substances. Knowledge empowers you to make informed decisions.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🤝 Strong Support System</h4>
+                    <p>Build healthy relationships with family and friends who support your wellbeing.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🧘 Stress Management</h4>
+                    <p>Develop healthy coping mechanisms like meditation, exercise, and therapy.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🎯 Set Goals</h4>
+                    <p>Have clear life goals and purposes that motivate you to stay healthy.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>❌ Say No</h4>
+                    <p>Practice refusing peer pressure. True friends respect your boundaries.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🏃 Stay Active</h4>
+                    <p>Regular physical activity reduces stress and improves mental health naturally.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>💚 Mental Health Care</h4>
+                    <p>Address underlying mental health issues with professional support.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🌟 Positive Activities</h4>
+                    <p>Engage in hobbies, volunteer work, and activities that bring joy and fulfillment.</p>
+                </div>
+            </div>
+
+            <div class="hazard-section" style="margin-top: 60px;">
+                <h2 class="section-title">Recovery Steps</h2>
+                <div class="cards">
+                    <div class="card">
+                        <h3>1. Acknowledge the Problem</h3>
+                        <p>Recognize and admit that you have an addiction. This is the crucial first step to recovery.</p>
+                    </div>
+                    <div class="card">
+                        <h3>2. Seek Professional Help</h3>
+                        <p>Contact healthcare providers, counselors, or addiction specialists for proper guidance.</p>
+                    </div>
+                    <div class="card">
+                        <h3>3. Detoxification</h3>
+                        <p>Undergo medically supervised detox to safely manage withdrawal symptoms.</p>
+                    </div>
+                    <div class="card">
+                        <h3>4. Rehabilitation Program</h3>
+                        <p>Participate in inpatient or outpatient treatment programs tailored to your needs.</p>
+                    </div>
+                    <div class="card">
+                        <h3>5. Ongoing Support</h3>
+                        <p>Join support groups like AA, NA, or counseling for continued recovery assistance.</p>
+                    </div>
+                    <div class="card">
+                        <h3>6. Lifestyle Changes</h3>
+                        <p>Develop new habits, relationships, and routines that support a substance-free life.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Resources Page -->
+    <div id="resources" class="page-content">
+        <div class="page-header">
+            <h1>Help & Resources</h1>
+            <p>Get immediate support and find treatment options</p>
+        </div>
+
+        <section class="content-section">
+            <div class="emergency">
+                <h2>🚨 Need Immediate Help?</h2>
+                <p style="font-size: 18px; margin-bottom: 30px;">If you or someone you know is in crisis, don't wait. Help is available right now.</p>
+                <a href="tel:988" class="btn">Call 988 - Suicide & Crisis Lifeline</a>
+            </div>
+
+            <h2 class="section-title">National Helplines</h2>
+            
+            <div class="resource-card">
+                <h3>SAMHSA National Helpline</h3>
+                <div class="contact-info">📞 <strong>1-800-662-4357</strong></div>
+                <p>Free, confidential, 24/7 treatment referral and information service for individuals and families facing substance abuse disorders.</p>
+            </div>
+
+            <div class="resource-card">
+                <h3>National Suicide Prevention Lifeline</h3>
+                <div class="contact-info">📞 <strong>988 or 1-800-273-8255</strong></div>
+                <p>Available 24/7 for anyone in suicidal crisis or emotional distress.</p>
+            </div>
+
+            <div class="resource-card">
+                <h3>Alcoholics Anonymous (AA)</h3>
+                <div class="contact-info">📞 <strong>Check local listings</strong></div>
+                <div class="contact-info">🌐 <a href="https://www.aa.org" target="_blank" style="color: var(--primary-color);">www.aa.org</a></div>
+                <p>Fellowship of people who share their experience, strength, and hope to solve their common problem with alcohol.</p>
+            </div>
+
+            <div class="resource-card">
+                <h3>Narcotics Anonymous (NA)</h3>
+                <div class="contact-info">📞 <strong>1-818-773-9999</strong></div>
+                <div class="contact-info">🌐 <a href="https://www.na.org" target="_blank" style="color: var(--primary-color);">www.na.org</a></div>
+                <p>International community-based association for recovering drug addicts.</p>
+            </div>
+
+            <div class="resource-card">
+                <h3>National Institute on Drug Abuse (NIDA)</h3>
+                <div class="contact-info">🌐 <a href="https://www.drugabuse.gov" target="_blank" style="color: var(--primary-color);">www.drugabuse.gov</a></div>
+                <p>Resources, research findings, and treatment information about drug abuse and addiction.</p>
+            </div>
+
+            <div class="resource-card">
+                <h3>Partnership to End Addiction</h3>
+                <div class="contact-info">📞 <strong>1-855-378-4373</strong></div>
+                <div class="contact-info">🌐 <a href="https://www.drugfree.org" target="_blank" style="color: var(--primary-color);">www.drugfree.org</a></div>
+                <p>Parent helpline and resources for families dealing with substance abuse.</p>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 60px;">Find Treatment Centers</h2>
+            
+            <div class="cards">
+                <div class="card">
+                    <h3>🏥 SAMHSA Treatment Locator</h3>
+                    <p>Find local treatment facilities, support groups, and community organizations.</p>
+                    <a href="https://findtreatment.gov" target="_blank" style="color: var(--primary-color); font-weight: 600;">Visit Treatment Locator →</a>
+                </div>
+                <div class="card">
+                    <h3>🔍 Psychology Today Directory</h3>
+                    <p>Search for addiction therapists and treatment centers by location and specialty.</p>
+                    <a href="https://www.psychologytoday.com" target="_blank" style="color: var(--primary-color); font-weight: 600;">Find a Therapist →</a>
+                </div>
+                <div class="card">
+                    <h3>💊 Medication-Assisted Treatment</h3>
+                    <p>Locate providers offering medications combined with counseling for substance use disorders.</p>
+                    <a href="https://www.samhsa.gov/medication-assisted-treatment" target="_blank" style="color: var(--primary-color); font-weight: 600;">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="stats" style="margin-top: 60px;">
+                <h2 style="text-align: center; margin-bottom: 40px;">Remember: You're Not Alone</h2>
+                <p style="text-align: center; font-size: 18px; opacity: 0.95;">Recovery is a journey, not a destination. Every step forward, no matter how small, is progress. Reach out for help today.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Break Free</h3>
+                <p>Empowering individuals and families to overcome addiction through education, support, and resources.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#hazards">Hazards</a></li>
+                    <li><a href="#prevention">Prevention</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Emergency</h3>
+                <ul>
+                    <li><a href="tel:988">988 - Crisis Lifeline</a></li>
+                    <li><a href="tel:1-800-662-4357">SAMHSA: 1-800-662-4357</a></li>
+                    <li><a href="tel:911">911 - Emergency Services</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Get Informed</h3>
+                <ul>
+                    <li><a href="https://www.samhsa.gov" target="_blank">SAMHSA</a></li>
+                    <li><a href="https://www.drugabuse.gov" target="_blank">NIDA</a></li>
+                    <li><a href="https://www.aa.org" target="_blank">AA</a></li>
+                    <li><a href="https://www.na.org" target="_blank">NA</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Break Free - Addiction Awareness. This website provides educational information only. Please consult healthcare professionals for medical advice.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth Navigation Between Pages
+        const navLinksItems = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page-content');
+
+        navLinksItems.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all links and pages
+                navLinksItems.forEach(l => l.classList.remove('active'));
+                pages.forEach(p => p.classList.remove('active'));
+                
+                // Add active class to clicked link
+                link.classList.add('active');
+                
+                // Show corresponding page
+                const targetId = link.getAttribute('href').substring(1);
+                const targetPage = document.getElementById(targetId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                    
+                    // Scroll to top smoothly
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }
+                
+                // Close mobile menu if open
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.card, .hazard-section, .tip-card, .resource-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Counter animation for statistics
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = formatNumber(target);
+                    clearInterval(timer);
+                } else {
+                    element.textContent = formatNumber(Math.floor(current));
+                }
+            }, 16);
+        }
+
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(0) + 'M+';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(0) + 'K+';
+            }
+            return num + '%';
+        }
+
+        // Trigger counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.stat-item h3');
+                    counters.forEach((counter, index) => {
+                        const values = [280000000, 75, 24];
+                        setTimeout(() => {
+                            animateCounter(counter, values[index], 2000);
+                        }, index * 200);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Add hover effect sound (optional - can be removed)
+        document.querySelectorAll('.card, .btn, .tip-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                el.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+        });
+
+        // Emergency button pulse animation
+        const emergencyBtn = document.querySelector('.emergency .btn');
+        if (emergencyBtn) {
+            setInterval(() => {
+                emergencyBtn.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    emergencyBtn.style.transform = 'scale(1)';
+                }, 500);
+            }, 3000);
+        }
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            if (hero && window.pageYOffset < window.innerHeight) {
+                const scrolled = window.pageYOffset;
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // Add active state persistence
+        window.addEventListener('load', () => {
+            const hash = window.location.hash;
+            if (hash) {
+                const link = document.querySelector(`a[href="${hash}"]`);
+                if (link) {
+                    link.click();
+                }
+            }
+        });
+
+        // Smooth scroll for all internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#home' && href !== '#hazards' && href !== '#prevention' && href !== '#resources') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
